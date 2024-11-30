@@ -1,4 +1,4 @@
-interface ICoinStatsResult {
+export interface ICoinStatsResult {
   id: string
   icon: string
   name: string
@@ -21,7 +21,7 @@ interface ICoinStatsResult {
   explorers: string[]
 }
 
-interface ICoinStatsMeta {
+export interface ICoinStatsMeta {
   page: number
   limit: number
   itemCount: number
