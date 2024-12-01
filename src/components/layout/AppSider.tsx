@@ -1,62 +1,23 @@
-import { Layout, Card, Statistic, List, Typography, Spin, Tag } from 'antd'
+import { Layout, Card, Statistic, List, Typography, Tag } from 'antd'
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons'
-import { useEffect, useState } from 'react'
-import { fetchAssets, fetchCrypto } from '../../utils/api'
-import { ICryptoAsset } from '../../types/ICryptoAsset'
-import { ICoinStatsResult } from '../../types/ICoinStats'
-import { percentDifference } from '../../utils/percentDifference'
 import { capitalize } from '../../utils/capitalize'
+import CryptoContext from '../../context/crypto-context'
+import { useContext } from 'react'
+
+export interface DataSource {
+  title: string
+  value: number
+  prefix: string | null
+  isPlain: boolean
+  hasTag: boolean
+}
 
 const siderStyle: React.CSSProperties = {
   padding: '1rem',
 }
 
 export default function AppSider() {
-  const [loading, setLoading] = useState(false)
-  const [crypto, setCrypto] = useState<ICoinStatsResult[]>([])
-  const [assets, setAssets] = useState<ICryptoAsset[]>([])
-
-  type DataSource = {
-    title: string
-    value: number
-    prefix: string | null
-    isPlain: boolean
-    hasTag: boolean
-  }
-
-  useEffect(() => {
-    async function preload() {
-      setLoading(true)
-      const { result } = await fetchCrypto()
-      const assets = await fetchAssets()
-
-      setAssets(
-        assets.map((asset) => {
-          const coin = result.find((coin) => coin.id === asset.id)
-
-          if (!coin) {
-            return asset
-          }
-
-          return {
-            grow: asset.price < coin.price,
-            growPercent: percentDifference(asset.price, coin.price),
-            totalAmount: asset.amount * coin.price,
-            totalProfit: asset.amount * (coin.price - asset.price),
-            ...asset,
-          }
-        })
-      )
-      setCrypto(result)
-      setLoading(false)
-    }
-
-    preload()
-  }, [])
-
-  if (loading) {
-    return <Spin fullscreen />
-  }
+  const { assets } = useContext(CryptoContext)
 
   return (
     <Layout.Sider width="25%" style={siderStyle}>
