@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { ICoinStatsResult } from '../types/ICoinStats'
 import { ICryptoAsset } from '../types/ICryptoAsset'
 import { fetchAssets, fetchCrypto } from '../utils/api'
@@ -65,3 +65,7 @@ export function CryptoContextProvider({ children }: IOwnProps) {
 }
 
 export default CryptoContext
+
+export function useCrypto() {
+  return useContext(CryptoContext)
+}
