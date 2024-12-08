@@ -23,13 +23,13 @@ export default function AppHeader() {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false)
   const { crypto } = useCrypto()
 
-  function handleSelect(value: string) {
+  const handleSelect = (value: string) => {
     setIsModalOpen(true)
     setCoin(crypto.find((c) => c.id === value))
   }
 
   useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === '/') {
         setIsSelectOpen((prev) => !prev)
       }
@@ -80,8 +80,10 @@ export default function AppHeader() {
         title="Add Asset"
         onClose={() => setIsDrawerOpen(false)}
         open={isDrawerOpen}
+        destroyOnClose
+        width={600}
       >
-        <AddAssetForm />
+        <AddAssetForm onClose={() => setIsDrawerOpen(false)} />
       </Drawer>
     </Layout.Header>
   )

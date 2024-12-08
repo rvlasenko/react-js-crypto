@@ -1,5 +1,6 @@
-import { Divider, Flex, Tag, Typography } from 'antd'
+import { Divider, Tag, Typography } from 'antd'
 import { ICoinStatsResult } from '../types/ICoinStats'
+import CoinInfo from './CoinInfo'
 
 export interface IOwnProps {
   coin: ICoinStatsResult
@@ -10,16 +11,7 @@ export type IProps = IOwnProps
 export default function CoinInfoModal({ coin }: IProps) {
   return (
     <>
-      <Flex align="center">
-        <img
-          src={coin.icon}
-          alt={coin.name}
-          style={{ width: 40, marginRight: 10 }}
-        />
-        <Typography.Title level={2} style={{ margin: 0 }}>
-          ({coin.symbol}) {coin.name}
-        </Typography.Title>
-      </Flex>
+      <CoinInfo coin={coin} isShowSymbol />
       <Divider />
       <Typography.Paragraph>
         <Typography.Text strong>1 hour: </Typography.Text>

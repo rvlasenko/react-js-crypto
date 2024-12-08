@@ -8,6 +8,7 @@ export interface ICryptoContext {
   assets: ICryptoAsset[]
   crypto: ICoinStatsResult[]
   loading: boolean
+  addAsset: (asset: ICryptoAsset) => void
 }
 
 export interface IOwnProps {
@@ -20,6 +21,7 @@ const CryptoContext = createContext<ICryptoContext>({
   assets: [],
   crypto: [],
   loading: false,
+  addAsset: () => {},
 })
 
 export function CryptoContextProvider({ children }: IOwnProps) {
@@ -27,29 +29,31 @@ export function CryptoContextProvider({ children }: IOwnProps) {
   const [crypto, setCrypto] = useState<ICoinStatsResult[]>([])
   const [assets, setAssets] = useState<ICryptoAsset[]>([])
 
+  const mapAssets = (assets: ICryptoAsset[], result: ICoinStatsResult[]) => {
+    return assets.map((asset) => {
+      const coin = result.find((coin) => coin.id === asset.id)
+
+      if (!coin) {
+        return asset
+      }
+
+      return {
+        grow: asset.price < coin.price,
+        growPercent: percentDifference(asset.price, coin.price),
+        totalAmount: asset.amount * coin.price,
+        totalProfit: asset.amount * (coin.price - asset.price),
+        ...asset,
+      }
+    })
+  }
+
   useEffect(() => {
-    async function preload() {
+    const preload = async () => {
       setLoading(true)
       const { result } = await fetchCrypto()
       const assets = await fetchAssets()
 
-      setAssets(
-        assets.map((asset) => {
-          const coin = result.find((coin) => coin.id === asset.id)
-
-          if (!coin) {
-            return asset
-          }
-
-          return {
-            grow: asset.price < coin.price,
-            growPercent: percentDifference(asset.price, coin.price),
-            totalAmount: asset.amount * coin.price,
-            totalProfit: asset.amount * (coin.price - asset.price),
-            ...asset,
-          }
-        })
-      )
+      setAssets(mapAssets(assets, result))
       setCrypto(result)
       setLoading(false)
     }
@@ -57,8 +61,12 @@ export function CryptoContextProvider({ children }: IOwnProps) {
     preload()
   }, [])
 
+  const addAsset = (asset: ICryptoAsset) => {
+    setAssets((prev) => mapAssets([...prev, asset], crypto))
+  }
+
   return (
-    <CryptoContext.Provider value={{ assets, crypto, loading }}>
+    <CryptoContext.Provider value={{ assets, crypto, loading, addAsset }}>
       {children}
     </CryptoContext.Provider>
   )
