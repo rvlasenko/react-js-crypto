@@ -28,8 +28,17 @@ export default function AppSider() {
             value={asset.totalAmount}
             precision={2}
             valueStyle={{ color: asset.grow ? '#3f8600' : '#cf1322' }}
-            prefix={asset.grow ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
-            suffix="$"
+            prefix={
+              asset.grow ? (
+                <>
+                  <ArrowUpOutlined /> $
+                </>
+              ) : (
+                <>
+                  <ArrowDownOutlined /> $
+                </>
+              )
+            }
           />
           <List
             size="small"

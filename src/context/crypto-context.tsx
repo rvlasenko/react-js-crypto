@@ -42,6 +42,7 @@ export function CryptoContextProvider({ children }: IOwnProps) {
         growPercent: percentDifference(asset.price, coin.price),
         totalAmount: asset.amount * coin.price,
         totalProfit: asset.amount * (coin.price - asset.price),
+        name: coin.name,
         ...asset,
       }
     })

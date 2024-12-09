@@ -5,6 +5,7 @@ export interface ICryptoAsset {
   date: Date
   totalAmount?: number
   totalProfit?: number
+  name?: string
   grow?: boolean
   growPercent?: number
 }

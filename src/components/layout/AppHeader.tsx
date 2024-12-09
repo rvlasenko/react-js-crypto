@@ -1,9 +1,11 @@
 import { Button, Layout, Select, Space, Modal, Drawer } from 'antd'
+import { useHotkeys } from 'react-hotkeys-hook'
 import { useCrypto } from '../../context/crypto-context'
-import { useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import CoinInfoModal from '../CoinInfoModal'
 import { ICoinStatsResult } from '../../types/ICoinStats'
 import AddAssetForm from '../AddAssetForm'
+import type { RefSelectProps } from 'antd'
 
 const headerStyle: React.CSSProperties = {
   width: '100%',
@@ -17,36 +19,30 @@ const headerStyle: React.CSSProperties = {
 }
 
 export default function AppHeader() {
-  const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false)
   const [coin, setCoin] = useState<ICoinStatsResult>()
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false)
   const { crypto } = useCrypto()
+  const selectRef = useRef<RefSelectProps>(null)
 
   const handleSelect = (value: string) => {
     setIsModalOpen(true)
     setCoin(crypto.find((c) => c.id === value))
   }
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === '/') {
-        setIsSelectOpen((prev) => !prev)
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [])
+  useHotkeys('/', () => {
+    selectRef.current?.focus()
+  })
 
   return (
     <Layout.Header style={headerStyle}>
       <Select
+        showSearch
         style={{ width: 200 }}
-        value="press / to open"
-        open={isSelectOpen}
+        value="Press / to search"
+        ref={selectRef}
         onSelect={handleSelect}
-        onClick={() => setIsSelectOpen((prev) => !prev)}
+        showAction={['focus']}
         options={crypto.map((coin) => ({
           label: coin.name,
           value: coin.id,
