@@ -1,5 +1,5 @@
 import { Layout, Typography } from 'antd'
-import { useCrypto } from '../../context/crypto-context'
+import { useCrypto } from '../../context/useCrypto'
 import PortfolioChart from './PortfolioChart'
 import AssetsTable from './AssetsTable'
 

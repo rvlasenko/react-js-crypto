@@ -11,7 +11,7 @@ import {
   DatePickerProps,
 } from 'antd'
 import { useRef, useState } from 'react'
-import { useCrypto } from '../context/crypto-context'
+import { useCrypto } from '../context/useCrypto'
 import { ICoinStatsResult } from '../types/ICoinStats'
 import CoinInfo from './CoinInfo'
 
