@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
-import { ICoinStatsResult } from '../types/ICoinStats'
-import { ICryptoAsset } from '../types/ICryptoAsset'
+import { ICoinStatsResult } from '../interfaces/ICoinStats'
+import { ICryptoAsset } from '../interfaces/ICryptoAsset'
 import { fetchAssets, fetchCrypto } from '../utils/api'
 import { percentDifference } from '../utils/percentDifference'
 

@@ -1,6 +1,6 @@
 import { Table } from 'antd'
 import type { TableColumnsType } from 'antd'
-import { useCrypto } from '../../context/useCrypto'
+import { useCrypto } from '../../hooks/useCrypto'
 
 interface DataType {
   key: React.Key

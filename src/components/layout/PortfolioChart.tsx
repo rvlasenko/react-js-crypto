@@ -1,6 +1,6 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Pie } from 'react-chartjs-2'
-import { useCrypto } from '../../context/useCrypto'
+import { useCrypto } from '../../hooks/useCrypto'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 

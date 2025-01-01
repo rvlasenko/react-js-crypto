@@ -1,5 +1,5 @@
 import { Flex, Typography } from 'antd'
-import { ICoinStatsResult } from '../types/ICoinStats'
+import { ICoinStatsResult } from '../interfaces/ICoinStats'
 
 export interface IOwnProps {
   coin: ICoinStatsResult

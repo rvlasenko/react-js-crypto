@@ -1,7 +1,7 @@
 import { Layout, Typography } from 'antd'
-import { useCrypto } from '../../context/useCrypto'
-import PortfolioChart from './PortfolioChart'
-import AssetsTable from './AssetsTable'
+import { useCrypto } from '@/hooks/useCrypto'
+import PortfolioChart from '@/components/layout/PortfolioChart'
+import AssetsTable from '@/components/layout/AssetsTable'
 
 const contentStyle: React.CSSProperties = {
   textAlign: 'center',
@@ -11,7 +11,7 @@ const contentStyle: React.CSSProperties = {
   padding: '1rem',
 }
 
-export default function AppContent() {
+export default function DashboardPage() {
   const { assets, crypto } = useCrypto()
 
   type Accumulator = { [key: string]: number }

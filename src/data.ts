@@ -1,4 +1,4 @@
-import { ICryptoAsset } from './types/ICryptoAsset'
+import { ICryptoAsset } from './interfaces/ICryptoAsset'
 
 export const cryptoAssets: ICryptoAsset[] = [
   {

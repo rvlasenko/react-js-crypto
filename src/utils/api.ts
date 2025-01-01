@@ -1,6 +1,6 @@
 import { cryptoAssets } from '../data'
-import { ICoinStats } from '../types/ICoinStats'
-import { ICryptoAsset } from '../types/ICryptoAsset'
+import { ICoinStats } from '../interfaces/ICoinStats'
+import { ICryptoAsset } from '../interfaces/ICryptoAsset'
 import { fetchWrapper, IDataResponse } from './fetch'
 
 export async function fetchCrypto(): Promise<IDataResponse<ICoinStats>> {

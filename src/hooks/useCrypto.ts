@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import CryptoContext from './crypto-context'
+import CryptoContext from '../context/crypto-context'
 
 export function useCrypto() {
   return useContext(CryptoContext)

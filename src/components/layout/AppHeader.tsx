@@ -1,9 +1,9 @@
 import { Button, Layout, Select, Space, Modal, Drawer } from 'antd'
 import { useHotkeys } from 'react-hotkeys-hook'
-import { useCrypto } from '../../context/useCrypto'
+import { useCrypto } from '../../hooks/useCrypto'
 import { useRef, useState } from 'react'
 import CoinInfoModal from '../CoinInfoModal'
-import { ICoinStatsResult } from '../../types/ICoinStats'
+import { ICoinStatsResult } from '../../interfaces/ICoinStats'
 import AddAssetForm from '../AddAssetForm'
 import type { RefSelectProps } from 'antd'
 

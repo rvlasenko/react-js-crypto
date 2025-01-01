@@ -11,8 +11,8 @@ import {
   DatePickerProps,
 } from 'antd'
 import { useRef, useState } from 'react'
-import { useCrypto } from '../context/useCrypto'
-import { ICoinStatsResult } from '../types/ICoinStats'
+import { useCrypto } from '../hooks/useCrypto'
+import { ICoinStatsResult } from '../interfaces/ICoinStats'
 import CoinInfo from './CoinInfo'
 
 const validateMessages = {

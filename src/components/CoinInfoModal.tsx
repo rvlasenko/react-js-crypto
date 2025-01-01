@@ -1,5 +1,5 @@
 import { Divider, Tag, Typography } from 'antd'
-import { ICoinStatsResult } from '../types/ICoinStats'
+import { ICoinStatsResult } from '../interfaces/ICoinStats'
 import CoinInfo from './CoinInfo'
 
 export interface IOwnProps {

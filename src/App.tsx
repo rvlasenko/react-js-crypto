@@ -1,10 +1,13 @@
-import AppLayout from './components/layout/AppLayout'
+import { ConfigProvider } from 'antd'
 import { CryptoContextProvider } from './context/crypto-context'
+import { AppRouter } from './components/router/AppRouter'
 
 export default function App() {
   return (
     <CryptoContextProvider>
-      <AppLayout />
+      <ConfigProvider>
+        <AppRouter />
+      </ConfigProvider>
     </CryptoContextProvider>
   )
 }
