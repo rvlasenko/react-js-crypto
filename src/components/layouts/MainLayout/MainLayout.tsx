@@ -17,9 +17,9 @@ export default function MainLayout() {
 
   return (
     <S.LayoutMaster>
-      <MainSider />
+      <MainHeader>Crypto app</MainHeader>
       <BaseLayout>
-        <MainHeader>123</MainHeader>
+        <MainSider />
         <MainContent id="main-content">
           <Outlet />
         </MainContent>

@@ -1,9 +1,10 @@
-import { BaseMenu } from '@/components/common/BaseMenu/BaseMenu'
 import { Link, useLocation } from 'react-router-dom'
-import { sidebarNavigation, SidebarNavigationItem } from './sidebarNavigation'
+import * as S from './SiderMenu.styles'
+import { sidebarNavigation } from '@/constants/sidebarNavigation'
+import { ISidebarNavigationItem } from '@/interfaces/ISidebarNavigationItem'
 
 const sidebarNavFlat = sidebarNavigation.reduce(
-  (result: SidebarNavigationItem[], current) =>
+  (result: ISidebarNavigationItem[], current) =>
     result.concat(
       current.children && current.children.length > 0
         ? current.children
@@ -21,9 +22,8 @@ export default function SiderMenu() {
   const defaultSelectedKeys = currentMenuItem ? [currentMenuItem.key] : []
 
   return (
-    <BaseMenu
+    <S.Menu
       mode="inline"
-      theme="dark"
       defaultSelectedKeys={defaultSelectedKeys}
       items={sidebarNavigation.map((nav) => {
         const isSubMenu = nav.children?.length
